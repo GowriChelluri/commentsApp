@@ -1,0 +1,50 @@
+.amber {
+  background-color: #f59e0b;
+}
+
+.blue {
+  background-color: #0b69ff;
+}
+
+.orange {
+  background-color: #f97316;
+}
+
+.emerald {
+  background-color: #10b981;
+}
+
+.teal {
+  background-color: #14b8a6;
+}
+
+.red {
+  background-color: #b91c1c;
+}
+
+.light-blue {
+  background-color: #0ea5e9;
+}
+
+.icon {
+  border-radius: 40px;
+  height: 30px;
+  width: 30px;
+  padding: 5px;
+  background-color: #0ea5e9;
+  color: white;
+  border-width: 0px;
+}
+.name-time-container {
+  display: flex;
+}
+.icon-container {
+  display: flex;
+}
+.like-container {
+  display: flex;
+}
+.like-delete-container {
+  display: flex;
+  justify-content: space-between;
+}
