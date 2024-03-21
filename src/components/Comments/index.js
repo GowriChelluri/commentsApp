@@ -26,12 +26,21 @@ class Comments extends Component {
 
   onAddComment = event => {
     const {name, comment, commentsList} = this.state
+    const initialBackgroundColorClassName = `initial-container ${
+      initialContainerBackgroundClassNames[
+        Math.ceil(
+          Math.random() * initialContainerBackgroundClassNames.length - 1,
+        )
+      ]
+    }`
     event.preventDefault()
     const newComment = {
       id: uuidv4(),
       name,
       comment,
       date: new Date(),
+      isLiked: false,
+      initialClassName: initialBackgroundColorClassName,
     }
     this.setState(prevState => ({
       commentsList: [...prevState.commentsList, newComment],
@@ -51,37 +60,52 @@ class Comments extends Component {
     }))
   }
 
+  deleteComment = id => {
+    const {commentsList} = this.state
+    const filteredData = commentsList.filter(eachItem => eachItem.id !== id)
+    this.setState({commentsList: filteredData})
+  }
+
   render() {
-    const {name, comment, commentsList, date} = this.state
+    const {name, comment, commentsList} = this.state
     return (
       <div className="bg-container">
         <h1 className="heading">Comments</h1>
         <p className="description">Say something about 4.0 Technologies</p>
-        <div className="comments-bg-container">
-          <form className="comments-container" onSubmit={this.onAddComment}>
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="input"
-              onChange={this.onChangeName}
-            />
-            <textarea
-              placeholder="Your Comment"
-              className="input"
-              rows="8"
-              cols="12"
-              onChange={this.onChangeComment}
-            />
+        <div>
+          <div className="comments-bg-container">
+            <form className="comments-container" onSubmit={this.onAddComment}>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="input"
+                value={name}
+                onChange={this.onChangeName}
+              />
+              <textarea
+                placeholder="Your Comment"
+                className="input"
+                rows="8"
+                cols="12"
+                value={comment}
+                onChange={this.onChangeComment}
+              />
 
-            <button type="submit" className="btn">
-              Add Comment
-            </button>
-          </form>
-          <img
-            src="https://assets.ccbp.in/frontend/react-js/comments-app/comments-img.png"
-            alt="comments"
-            className="img"
-          />
+              <button type="submit" className="btn">
+                Add Comment
+              </button>
+            </form>
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/comments-app/comments-img.png"
+              alt="comments"
+              className="img"
+            />
+          </div>
+          <hr />
+        </div>
+        <div className="comments-count-container">
+          <button className="comments-count">{commentsList.length}</button>
+          <p className="comments-count-heading">Comments</p>
         </div>
         <ul className="list-items-container">
           {commentsList.map(eachItem => (
@@ -89,6 +113,7 @@ class Comments extends Component {
               commentDetails={eachItem}
               key={eachItem.id}
               toggleIsLiked={this.toggleIsLiked}
+              deleteComment={this.deleteComment}
             />
           ))}
         </ul>

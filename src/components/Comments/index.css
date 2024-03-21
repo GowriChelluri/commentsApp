@@ -43,3 +43,17 @@
 .list-items-container {
   list-style-type: none;
 }
+.comments-count {
+  background-color: #0284c7;
+  color: white;
+  border-width: 0px;
+  margin-right: 7px;
+  height: 15px;
+}
+.comments-count-container {
+  display: flex;
+  align-items: center;
+}
+.comments-count-heading {
+  font-size: 12px;
+}
